@@ -1,1083 +1,909 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Dhara Patel — Mobile Architect & iOS Lead</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<title>Dhara Patel — Mobile Architect & iOS Technical Lead</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --surface2: #18181f;
-    --border: rgba(255,255,255,0.07);
-    --accent: #7B6EF6;
-    --accent2: #e8d5b7;
-    --accent3: #4ecdc4;
-    --text: #e8e8f0;
-    --muted: #6e6e85;
-    --glow: rgba(123,110,246,0.18);
-  }
+/* ─── LIGHT TOKENS ───────────────────────────── */
+:root {
+  --ink:     #0F0E0C;
+  --ink2:    #2E2C28;
+  --body:    #4B4843;
+  --muted:   #8A8780;
+  --rule:    #DDD9D0;
+  --bg:      #FAFAF7;
+  --paper:   #FFFFFF;
+  --lift:    #F4F2ED;
+  --blue:    #1A4FC4;
+  --blue-lt: #EBF0FB;
+  --amber:   #9B6F1E;
+  --amber-lt:#FDF5E6;
+  --teal:    #1A7B64;
+  --teal-lt: #E8F6F2;
+  --nav:     68px;
+  --comp-bg: #0F0E0C;
+  --comp-card:#1A1815;
+  --comp-card-hover:#222018;
+  --contact-bg:#0F0E0C;
+  --footer-bg:#2E2C28;
+  --hero-r-bg:var(--lift);
+  --nav-bg:  rgba(250,250,247,0.96);
+}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ─── DARK TOKENS ────────────────────────────── */
+[data-theme="dark"] {
+  --ink:     #F0EDE8;
+  --ink2:    #D4CFC8;
+  --body:    #A8A39C;
+  --muted:   #6B6760;
+  --rule:    #2E2B26;
+  --bg:      #141311;
+  --paper:   #1C1A17;
+  --lift:    #211F1C;
+  --blue:    #6A9BFF;
+  --blue-lt: #1A2340;
+  --amber:   #D4A854;
+  --amber-lt:#231C0E;
+  --teal:    #4EC9A8;
+  --teal-lt: #0E1F1B;
+  --comp-bg: #0A0908;
+  --comp-card:#1A1815;
+  --comp-card-hover:#242018;
+  --contact-bg:#0A0908;
+  --footer-bg:#0F0E0C;
+  --hero-r-bg:#1C1A17;
+  --nav-bg:  rgba(20,19,17,0.97);
+}
 
-  html { scroll-behavior: smooth; }
+/* ─── RESET ──────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:'Outfit',sans-serif;font-weight:400;
+  line-height:1.7;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  transition:background .3s ease,color .3s ease;
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--rule);border-radius:10px}
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+/* ─── NAV ────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  height:var(--nav);
+  background:var(--nav-bg);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;
+  padding:0 4rem;gap:2rem;
+  transition:background .3s,border-color .3s;
+}
+.nb{text-decoration:none;flex-shrink:0}
+.nb-name{
+  font-family:'Libre Baskerville',serif;
+  font-weight:700;font-size:1.2rem;
+  color:var(--ink);letter-spacing:-0.01em;
+  display:block;line-height:1.1;
+  transition:color .3s;
+}
+.nb-role{
+  font-family:'Fira Code',monospace;
+  font-size:0.58rem;color:var(--muted);
+  letter-spacing:0.12em;text-transform:uppercase;
+  display:block;margin-top:2px;transition:color .3s;
+}
+.nl{display:flex;gap:0;list-style:none;margin-left:auto}
+.nl a{
+  font-size:0.82rem;font-weight:500;color:var(--body);
+  text-decoration:none;padding:0.38rem 0.9rem;
+  border-radius:5px;transition:all .15s;letter-spacing:0.01em;
+}
+.nl a:hover,.nl a.on{color:var(--blue);background:var(--blue-lt)}
+.nsep{width:1px;height:22px;background:var(--rule);flex-shrink:0;transition:background .3s}
+.nc{display:flex;gap:0.4rem;flex-shrink:0}
+.nc a{
+  display:inline-flex;align-items:center;gap:0.35rem;
+  font-family:'Fira Code',monospace;font-size:0.64rem;
+  letter-spacing:0.04em;color:var(--body);
+  text-decoration:none;padding:0.4rem 0.88rem;
+  border:1px solid var(--rule);border-radius:100px;
+  background:var(--paper);transition:all .15s;white-space:nowrap;
+}
+.nc a:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-lt)}
 
-  /* ── NOISE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.4;
-  }
+/* ─── THEME TOGGLE ───────────────────────────── */
+#theme-toggle{
+  display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:50%;
+  background:var(--lift);border:1px solid var(--rule);
+  cursor:pointer;transition:all .2s;flex-shrink:0;
+  font-size:1rem;
+}
+#theme-toggle:hover{border-color:var(--blue);background:var(--blue-lt);transform:rotate(20deg)}
 
-  /* ── GRID LINES ── */
-  body::after {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-    background-size: 80px 80px;
-    pointer-events: none;
-    z-index: 0;
-  }
+/* ─── HERO ───────────────────────────────────── */
+#hero{
+  min-height:100vh;padding-top:var(--nav);
+  display:grid;grid-template-columns:1fr 380px;
+  gap:0;background:var(--paper);
+  border-bottom:1px solid var(--rule);
+  position:relative;overflow:hidden;
+  transition:background .3s,border-color .3s;
+}
+.hero-l{
+  padding:5rem 4rem;
+  display:flex;flex-direction:column;justify-content:center;
+  border-right:1px solid var(--rule);
+  position:relative;z-index:1;
+  transition:border-color .3s;
+}
+.hero-l::before{
+  content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(
+    to bottom,transparent,transparent 39px,var(--rule) 39px,var(--rule) 40px
+  );opacity:0.2;pointer-events:none;
+}
+.hbadge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-family:'Fira Code',monospace;font-size:0.64rem;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--teal);background:var(--teal-lt);
+  border:1px solid rgba(26,123,100,.25);
+  padding:0.3rem 0.9rem;border-radius:100px;
+  margin-bottom:2rem;align-self:flex-start;
+  animation:up .55s ease both;transition:background .3s,color .3s;
+}
+.hbadge::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--teal);animation:blink 2s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 3rem;
-    background: rgba(10,10,15,0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.1rem;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    text-decoration: none;
-  }
-  .nav-logo span { color: var(--accent); }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--text); }
+.hname{
+  font-family:'Libre Baskerville',serif;font-weight:700;
+  font-size:clamp(3.8rem,6vw,6rem);
+  line-height:1;letter-spacing:-0.03em;
+  color:var(--ink);margin-bottom:0.7rem;
+  animation:up .55s .06s ease both;
+  transition:color .3s;
+}
+.htitle{
+  font-family:'Libre Baskerville',serif;
+  font-weight:400;font-style:italic;
+  font-size:clamp(1.25rem,2vw,1.75rem);
+  color:var(--blue);margin-bottom:2rem;
+  animation:up .55s .12s ease both;transition:color .3s;
+}
+.hsummary{
+  font-size:1rem;color:var(--body);
+  max-width:520px;line-height:1.8;
+  margin-bottom:2.2rem;
+  animation:up .55s .18s ease both;transition:color .3s;
+}
+.hmeta{
+  display:flex;gap:1.5rem;flex-wrap:wrap;
+  margin-bottom:2.4rem;
+  animation:up .55s .24s ease both;
+}
+.hm{
+  display:flex;align-items:center;gap:0.4rem;
+  font-family:'Fira Code',monospace;font-size:0.68rem;
+  color:var(--muted);letter-spacing:0.04em;transition:color .3s;
+}
+.hctx{display:flex;gap:0.7rem;flex-wrap:wrap;animation:up .55s .3s ease both}
+.btn1{
+  display:inline-flex;align-items:center;gap:0.45rem;
+  background:var(--ink);color:var(--bg);font-size:0.84rem;
+  font-weight:600;text-decoration:none;
+  padding:0.82rem 1.8rem;border-radius:6px;
+  transition:all .2s;letter-spacing:0.01em;
+}
+.btn1:hover{opacity:.85;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.btn2{
+  display:inline-flex;align-items:center;gap:0.45rem;
+  border:1.5px solid var(--rule);color:var(--ink);
+  background:transparent;font-size:0.84rem;font-weight:500;
+  text-decoration:none;padding:0.82rem 1.8rem;
+  border-radius:6px;transition:all .2s;
+}
+.btn2:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding: 0 3rem;
-    position: relative;
-    overflow: hidden;
-  }
+/* hero right */
+.hero-r{
+  display:flex;flex-direction:column;
+  background:var(--hero-r-bg);
+  animation:up .55s .16s ease both;
+  transition:background .3s;
+}
+.hr-stats{padding:3rem 2.5rem;border-bottom:1px solid var(--rule);transition:border-color .3s}
+.hr-label{
+  font-family:'Fira Code',monospace;font-size:0.6rem;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1.5rem;
+  padding-bottom:0.7rem;border-bottom:1px solid var(--rule);
+  transition:color .3s,border-color .3s;
+}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.sn{
+  font-family:'Libre Baskerville',serif;font-weight:700;
+  font-size:2.5rem;color:var(--ink);line-height:1;
+  letter-spacing:-0.02em;transition:color .3s;
+}
+.sn sup{font-size:1rem;color:var(--blue);vertical-align:super;transition:color .3s}
+.sl{
+  font-family:'Fira Code',monospace;font-size:0.6rem;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--muted);margin-top:0.2rem;transition:color .3s;
+}
+.hr-exp{padding:2rem 2.5rem;border-bottom:1px solid var(--rule);transition:border-color .3s}
+.etags{display:flex;flex-wrap:wrap;gap:0.38rem}
+.et{
+  font-family:'Fira Code',monospace;font-size:0.64rem;
+  padding:0.28rem 0.72rem;border-radius:4px;
+  border:1px solid var(--rule);color:var(--body);
+  background:var(--paper);letter-spacing:0.03em;
+  transition:all .3s;
+}
+.et.hi{background:var(--blue-lt);border-color:rgba(100,155,255,.25);color:var(--blue)}
+.hr-loc{padding:2rem 2.5rem;flex:1}
+.loc-line{
+  display:flex;align-items:center;gap:0.6rem;
+  font-size:0.82rem;color:var(--body);margin-bottom:0.5rem;transition:color .3s;
+}
+.loc-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);flex-shrink:0;transition:background .3s}
 
-  .hero-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    pointer-events: none;
-  }
-  .hero-orb-1 {
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(123,110,246,0.2), transparent 70%);
-    top: -150px; right: -100px;
-    animation: float 8s ease-in-out infinite;
-  }
-  .hero-orb-2 {
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(78,205,196,0.12), transparent 70%);
-    bottom: -100px; left: 200px;
-    animation: float 10s ease-in-out infinite reverse;
-  }
+/* ─── SECTION COMMONS ────────────────────────── */
+section{position:relative;padding:5.5rem 4rem;transition:background .3s}
+.ey{
+  display:flex;align-items:center;gap:0.7rem;
+  font-family:'Fira Code',monospace;font-size:0.62rem;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:0.8rem;transition:color .3s;
+}
+.ey::before{content:'';width:24px;height:1.5px;background:var(--blue);flex-shrink:0;transition:background .3s}
+.ey.w{color:rgba(255,255,255,.5)}
+.ey.w::before{background:rgba(255,255,255,.35)}
+.sh{
+  font-family:'Libre Baskerville',serif;font-weight:700;
+  font-size:clamp(1.9rem,3vw,2.6rem);letter-spacing:-0.02em;
+  line-height:1.12;color:var(--ink);margin-bottom:3rem;transition:color .3s;
+}
+.sh.w{color:#F5F3EE}
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-30px) scale(1.05); }
-  }
+/* ─── COMPETENCIES ───────────────────────────── */
+#comp{background:var(--comp-bg);padding:5.5rem 4rem}
+.cg{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(255,255,255,.07);
+  border-radius:10px;overflow:hidden;
+}
+.ci{background:var(--comp-card);padding:1.8rem;transition:background .2s}
+.ci:hover{background:var(--comp-card-hover)}
+.cico{
+  width:36px;height:36px;border-radius:7px;
+  background:rgba(106,155,255,.15);border:1px solid rgba(106,155,255,.22);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;margin-bottom:.9rem;
+}
+.cn{font-weight:600;font-size:.86rem;color:#EEE;margin-bottom:.35rem;line-height:1.3}
+.cd{font-size:.76rem;color:rgba(255,255,255,.38);line-height:1.55}
 
-  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+/* ─── EXPERIENCE ─────────────────────────────── */
+#exp{background:var(--paper)}
+.ew{max-width:940px}
+.ee{
+  display:grid;grid-template-columns:220px 1fr;
+  gap:3.5rem;padding:2.8rem 0;
+  border-top:1px solid var(--rule);transition:border-color .3s;
+}
+.ee:last-child{border-bottom:1px solid var(--rule)}
+.ep{font-family:'Fira Code',monospace;font-size:.66rem;color:var(--blue);letter-spacing:.06em;margin-bottom:.55rem;transition:color .3s}
+.ec{
+  font-family:'Libre Baskerville',serif;font-weight:700;
+  font-size:1rem;color:var(--ink);margin-bottom:.15rem;line-height:1.2;transition:color .3s;
+}
+.eloc{font-family:'Fira Code',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.04em;transition:color .3s}
+.er{
+  font-family:'Libre Baskerville',serif;font-weight:700;
+  font-size:1.45rem;color:var(--ink);
+  margin-bottom:1.2rem;letter-spacing:-.015em;line-height:1.15;transition:color .3s;
+}
+.el{list-style:none;margin-bottom:1.4rem}
+.el li{
+  font-size:.875rem;color:var(--body);line-height:1.75;
+  padding:.28rem 0 .28rem 1.3rem;position:relative;
+  border-bottom:1px dashed var(--rule);transition:color .3s,border-color .3s;
+}
+.el li:last-child{border-bottom:none}
+.el li::before{content:'▸';position:absolute;left:0;top:.42rem;color:var(--blue);font-size:.7rem;transition:color .3s}
+.el li strong{color:var(--ink);font-weight:600;transition:color .3s}
+.br{display:flex;gap:.38rem;flex-wrap:wrap}
+.b{
+  font-family:'Fira Code',monospace;font-size:.6rem;
+  letter-spacing:.04em;padding:.22rem .65rem;border-radius:4px;
+  border:1px solid var(--rule);color:var(--body);background:var(--bg);
+  transition:all .3s;
+}
+.b.bl{border-color:rgba(106,155,255,.35);color:var(--blue);background:var(--blue-lt)}
+.b.bg{border-color:rgba(78,201,168,.3);color:var(--teal);background:var(--teal-lt)}
+.b.ba{border-color:rgba(212,168,84,.3);color:var(--amber);background:var(--amber-lt)}
 
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid rgba(123,110,246,0.3);
-    padding: 0.4rem 1rem;
-    border-radius: 100px;
-    margin-bottom: 2rem;
-    animation: fadeUp 0.8s ease both;
-  }
-  .hero-tag::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+/* ─── PROJECTS ───────────────────────────────── */
+#proj{background:var(--lift)}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.pc{
+  background:var(--paper);border:1px solid var(--rule);
+  border-radius:10px;padding:1.8rem;
+  transition:all .2s;display:flex;flex-direction:column;
+}
+.pc:hover{border-color:rgba(106,155,255,.35);box-shadow:0 8px 32px rgba(106,155,255,.1);transform:translateY(-3px)}
+.pc.wide{
+  grid-column:span 3;
+  display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;
+}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem}
+.pi{font-family:'Fira Code',monospace;font-size:.58rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;transition:color .3s}
+.prb{
+  font-family:'Fira Code',monospace;font-size:.58rem;
+  padding:.18rem .52rem;border-radius:100px;
+  background:var(--blue-lt);color:var(--blue);
+  border:1px solid rgba(106,155,255,.25);white-space:nowrap;transition:all .3s;
+}
+.pn{
+  font-family:'Libre Baskerville',serif;font-weight:700;
+  font-size:1.3rem;color:var(--ink);letter-spacing:-.01em;
+  margin-bottom:.2rem;line-height:1.2;transition:color .3s;
+}
+.pcat{
+  font-family:'Fira Code',monospace;font-size:.6rem;
+  color:var(--amber);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.9rem;transition:color .3s;
+}
+.pd{font-size:.83rem;color:var(--body);line-height:1.68;flex:1;margin-bottom:1.2rem;transition:color .3s}
+.ps{display:flex;flex-wrap:wrap;gap:.32rem;margin-top:auto}
+.st{
+  font-family:'Fira Code',monospace;font-size:.58rem;
+  padding:.18rem .52rem;border-radius:3px;
+  background:var(--lift);border:1px solid var(--rule);color:var(--muted);transition:all .3s;
+}
 
-  .hero-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(3.5rem, 8vw, 7rem);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    margin-bottom: 1.5rem;
-    animation: fadeUp 0.8s 0.1s ease both;
-  }
-  .hero-name .line2 { color: var(--accent); }
+/* project highlight box */
+.phbox{
+  margin-top:1rem;padding:1rem 1.2rem;
+  background:var(--lift);border-radius:8px;border:1px solid var(--rule);transition:all .3s;
+}
+.phbox-lbl{font-family:'Fira Code',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.phbox-txt{font-size:.82rem;color:var(--body);line-height:1.7}
 
-  .hero-desc {
-    font-size: 1.15rem;
-    color: var(--muted);
-    max-width: 560px;
-    margin-bottom: 3rem;
-    font-weight: 300;
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
+/* ─── TECH SKILLS ────────────────────────────── */
+#tech{background:var(--paper)}
+.tl{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem}
+.tg{margin-bottom:1.9rem}
+.tlb{
+  font-family:'Fira Code',monospace;font-size:.6rem;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:.75rem;padding-bottom:.45rem;border-bottom:1px solid var(--rule);
+  transition:color .3s,border-color .3s;
+}
+.tp{display:flex;flex-wrap:wrap;gap:.4rem}
+.pill{
+  font-family:'Fira Code',monospace;font-size:.7rem;
+  padding:.36rem .84rem;border-radius:5px;
+  border:1px solid var(--rule);color:var(--body);background:var(--bg);
+  transition:all .15s;cursor:default;letter-spacing:.03em;
+}
+.pill:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-lt)}
+.pill.p{background:var(--ink);border-color:var(--ink);color:var(--bg);font-weight:500}
+.pill.p:hover{opacity:.85}
 
-  .hero-stats {
-    display: flex; gap: 3rem;
-    margin-bottom: 3rem;
-    animation: fadeUp 0.8s 0.3s ease both;
-  }
-  .stat-item { }
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 2.2rem;
-    color: var(--text);
-    line-height: 1;
-  }
-  .stat-num span { color: var(--accent); }
-  .stat-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 0.3rem;
-  }
+/* ─── EDUCATION ──────────────────────────────── */
+#edu{background:var(--lift)}
+.egrid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.egh{
+  font-family:'Libre Baskerville',serif;font-weight:700;
+  font-size:1.05rem;color:var(--ink);margin-bottom:1.1rem;transition:color .3s;
+}
+.edl{display:flex;flex-direction:column;gap:.9rem}
+.edi{
+  background:var(--paper);border:1px solid var(--rule);border-radius:8px;
+  padding:1.4rem;display:flex;gap:1.1rem;align-items:flex-start;transition:all .2s;
+}
+.edi:hover{border-color:rgba(106,155,255,.35)}
+.edico{
+  width:42px;height:42px;flex-shrink:0;border-radius:8px;
+  background:var(--blue-lt);border:1px solid rgba(106,155,255,.25);
+  display:flex;align-items:center;justify-content:center;font-size:1.05rem;transition:all .3s;
+}
+.edd{font-family:'Libre Baskerville',serif;font-weight:700;font-size:.98rem;color:var(--ink);margin-bottom:.12rem;line-height:1.3;transition:color .3s}
+.eds{font-size:.8rem;color:var(--body);margin-bottom:.18rem;transition:color .3s}
+.edy{font-family:'Fira Code',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.06em;transition:color .3s}
+.cl{display:flex;flex-direction:column;gap:.7rem}
+.cit{
+  background:var(--paper);border:1px solid var(--rule);border-radius:8px;
+  padding:1.1rem 1.4rem;display:flex;align-items:center;gap:.9rem;transition:all .2s;
+}
+.cit:hover{border-color:rgba(212,168,84,.4)}
+.cdot{width:7px;height:7px;border-radius:50%;background:var(--amber);flex-shrink:0;transition:background .3s}
+.cname{font-size:.875rem;font-weight:500;color:var(--ink);flex:1;transition:color .3s}
+.csrc{font-family:'Fira Code',monospace;font-size:.6rem;color:var(--muted);flex-shrink:0;letter-spacing:.05em;transition:color .3s}
 
-  .hero-cta {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    animation: fadeUp 0.8s 0.4s ease both;
-  }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    background: var(--accent);
-    color: #fff;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 0.9rem 2rem;
-    border-radius: 4px;
-    transition: all 0.2s;
-    box-shadow: 0 0 30px rgba(123,110,246,0.3);
-  }
-  .btn-primary:hover {
-    background: #9589f8;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 40px rgba(123,110,246,0.45);
-  }
-  .btn-outline {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 0.9rem 2rem;
-    border-radius: 4px;
-    transition: all 0.2s;
-  }
-  .btn-outline:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateY(-2px);
-  }
+/* ─── CONTACT ────────────────────────────────── */
+#contact{background:var(--contact-bg);padding:5.5rem 4rem}
+.ctg{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.cth{
+  font-family:'Libre Baskerville',serif;font-weight:700;
+  font-size:clamp(2rem,3.8vw,3rem);color:#F5F3EE;
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:.9rem;
+}
+.cth em{color:#7B9FFF;font-style:italic}
+.cts{font-size:.9rem;color:rgba(255,255,255,.42);line-height:1.75;margin-bottom:2rem;max-width:400px}
+.clinks{display:flex;flex-direction:column;gap:.7rem}
+.clink{
+  display:flex;align-items:center;gap:.9rem;
+  padding:1rem 1.3rem;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:8px;text-decoration:none;transition:all .2s;
+}
+.clink:hover{background:rgba(106,155,255,.12);border-color:rgba(106,155,255,.3);transform:translateX(4px)}
+.clico{
+  width:36px;height:36px;border-radius:7px;
+  background:rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;
+}
+.cltxt{flex:1}
+.cllb{font-family:'Fira Code',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:.06rem}
+.clv{font-size:.84rem;font-weight:500;color:rgba(255,255,255,.8)}
+.clarr{color:rgba(255,255,255,.2);transition:all .2s}
+.clink:hover .clarr{color:#7B9FFF;transform:translateX(3px)}
+.avbox{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;padding:1.8rem;margin-bottom:1.1rem;
+}
+.avlbl{font-family:'Fira Code',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:.9rem}
+.avst{display:flex;align-items:center;gap:.55rem;font-size:.93rem;font-weight:500;color:#7EDBA5;margin-bottom:.4rem}
+.avst::before{content:'';width:7px;height:7px;background:#7EDBA5;border-radius:50%;animation:blink 2s ease-in-out infinite}
+.avn{font-size:.8rem;color:rgba(255,255,255,.32);line-height:1.65}
+.itags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.9rem}
+.itag{
+  font-family:'Fira Code',monospace;font-size:.6rem;
+  padding:.28rem .72rem;border-radius:100px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);
+  color:rgba(255,255,255,.46);letter-spacing:.04em;
+}
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+/* ─── FOOTER ─────────────────────────────────── */
+footer{
+  background:var(--footer-bg);padding:1.4rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,.07);
+  transition:background .3s;
+}
+.fl{font-family:'Fira Code',monospace;font-size:.62rem;color:rgba(255,255,255,.22);letter-spacing:.06em}
+.fr{font-family:'Fira Code',monospace;font-size:.6rem;color:rgba(255,255,255,.16);letter-spacing:.08em;text-transform:uppercase}
 
-  /* ── SCROLL INDICATOR ── */
-  .scroll-hint {
-    position: absolute; bottom: 2.5rem; left: 3rem;
-    display: flex; align-items: center; gap: 0.8rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    animation: fadeUp 1s 1s ease both;
-  }
-  .scroll-line {
-    width: 40px; height: 1px;
-    background: linear-gradient(to right, var(--accent), transparent);
-  }
+/* ─── REVEAL ─────────────────────────────────── */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.rv.on{opacity:1;transform:translateY(0)}
 
-  /* ── SECTIONS ── */
-  section {
-    position: relative; z-index: 1;
-    padding: 6rem 3rem;
-  }
-
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 0.8rem;
-  }
-  .section-label::before {
-    content: '';
-    width: 24px; height: 1px;
-    background: var(--accent);
-  }
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: clamp(2rem, 4vw, 3rem);
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: 3rem;
-  }
-
-  /* ── SKILLS GRID ── */
-  #skills { background: var(--surface); }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .skill-card {
-    background: var(--surface);
-    padding: 2rem;
-    transition: background 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .skill-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(to right, var(--accent), transparent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s;
-  }
-  .skill-card:hover { background: var(--surface2); }
-  .skill-card:hover::before { transform: scaleX(1); }
-
-  .skill-icon {
-    width: 40px; height: 40px;
-    border-radius: 8px;
-    background: var(--glow);
-    border: 1px solid rgba(123,110,246,0.2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-  .skill-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-    color: var(--text);
-  }
-  .skill-desc {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-  /* ── EXPERIENCE ── */
-  #experience { }
-
-  .exp-timeline { max-width: 860px; }
-  .exp-item {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 3rem;
-    padding: 3rem 0;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-  }
-  .exp-item:last-child { border-bottom: none; }
-
-  .exp-meta { padding-top: 0.2rem; }
-  .exp-period {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.06em;
-    margin-bottom: 0.5rem;
-  }
-  .exp-company {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--text);
-    margin-bottom: 0.3rem;
-  }
-  .exp-location {
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
-
-  .exp-role {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: var(--text);
-    margin-bottom: 1.2rem;
-    letter-spacing: -0.02em;
-  }
-  .exp-points { list-style: none; }
-  .exp-points li {
-    font-size: 0.88rem;
-    color: #a0a0b8;
-    line-height: 1.65;
-    padding: 0.45rem 0;
-    padding-left: 1.2rem;
-    position: relative;
-  }
-  .exp-points li::before {
-    content: '→';
-    position: absolute; left: 0;
-    color: var(--accent);
-    font-size: 0.75rem;
-  }
-  .exp-highlight {
-    display: inline-flex; gap: 0.5rem; flex-wrap: wrap;
-    margin-top: 1rem;
-  }
-  .tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.06em;
-    padding: 0.25rem 0.7rem;
-    border-radius: 100px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    background: var(--surface);
-  }
-  .tag.accent { border-color: rgba(123,110,246,0.4); color: var(--accent); background: rgba(123,110,246,0.07); }
-  .tag.teal { border-color: rgba(78,205,196,0.4); color: var(--accent3); background: rgba(78,205,196,0.07); }
-
-  /* ── PROJECTS ── */
-  #projects { background: var(--surface); }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 1.5rem;
-  }
-  .project-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 2rem;
-    transition: all 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .project-card::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(circle at 80% 20%, var(--glow), transparent 60%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-  }
-  .project-card:hover {
-    border-color: rgba(123,110,246,0.35);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  }
-  .project-card:hover::after { opacity: 1; }
-
-  .project-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    margin-bottom: 1rem;
-  }
-  .project-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.3rem;
-    color: var(--text);
-  }
-  .project-role {
-    font-size: 0.75rem;
-    color: var(--accent);
-    font-family: 'DM Mono', monospace;
-    margin-bottom: 1.2rem;
-    letter-spacing: 0.05em;
-  }
-  .project-desc {
-    font-size: 0.85rem;
-    color: #8888a8;
-    line-height: 1.65;
-    margin-bottom: 1.5rem;
-  }
-  .project-stack {
-    display: flex; gap: 0.4rem; flex-wrap: wrap;
-  }
-  .project-stack .tag { font-size: 0.6rem; }
-
-  /* ── TECH SKILLS BAR ── */
-  #techskills { }
-
-  .tech-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-  }
-  .tech-group { margin-bottom: 2.5rem; }
-  .tech-group-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.2rem;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.6rem;
-  }
-  .tech-pill-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .tech-pill {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    padding: 0.45rem 1rem;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    color: var(--text);
-    background: var(--surface);
-    letter-spacing: 0.04em;
-    transition: all 0.2s;
-    cursor: default;
-  }
-  .tech-pill:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(123,110,246,0.08);
-  }
-  .tech-pill.expert {
-    border-color: rgba(123,110,246,0.5);
-    color: var(--accent);
-    background: rgba(123,110,246,0.1);
-  }
-
-  /* ── CERTIFICATIONS ── */
-  #certifications { background: var(--surface); }
-
-  .cert-list { display: flex; flex-direction: column; gap: 1rem; max-width: 700px; }
-  .cert-item {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.5rem 2rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--bg);
-    transition: border-color 0.2s;
-  }
-  .cert-item:hover { border-color: rgba(123,110,246,0.35); }
-  .cert-left { }
-  .cert-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-bottom: 0.25rem;
-  }
-  .cert-provider {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-  }
-  .cert-badge {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: var(--glow);
-    border: 1px solid rgba(123,110,246,0.3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
-    flex-shrink: 0;
-  }
-
-  /* ── CONTACT ── */
-  #contact {
-    min-height: 50vh;
-    display: flex; align-items: center;
-    background: var(--bg);
-  }
-  .contact-inner {
-    width: 100%;
-    max-width: 700px;
-  }
-  .contact-heading {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    letter-spacing: -0.04em;
-    line-height: 1;
-    margin-bottom: 1.5rem;
-  }
-  .contact-heading em { color: var(--accent); font-style: normal; }
-  .contact-sub {
-    font-size: 1rem;
-    color: var(--muted);
-    margin-bottom: 2.5rem;
-    max-width: 480px;
-  }
-  .contact-links {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-  }
-  .contact-link {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text);
-    text-decoration: none;
-    padding: 0.85rem 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    transition: all 0.2s;
-  }
-  .contact-link:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 1.5rem 3rem;
-    display: flex; justify-content: space-between; align-items: center;
-    position: relative; z-index: 1;
-  }
-  .footer-copy {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-  }
-  .footer-stack {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
-  }
-
-  /* ── DIVIDER ── */
-  .divider {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--border) 30%, var(--border) 70%, transparent);
-  }
-
-  /* ── INTERSECTION OBSERVER ANIMATIONS ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    section { padding: 4rem 1.5rem; }
-    #hero { padding: 0 1.5rem; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    .tech-cols { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-stats { gap: 2rem; }
-    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
-    .scroll-hint { display: none; }
-  }
+/* ─── RESPONSIVE ─────────────────────────────── */
+@media(max-width:1060px){
+  nav{padding:0 2rem}
+  .nl{display:none}
+  #hero{grid-template-columns:1fr}
+  .hero-l{padding:3rem 2rem 4rem;border-right:none}
+  .hero-r{display:none}
+  section{padding:4rem 2rem}
+  #comp,#contact{padding:4rem 2rem}
+  .cg{grid-template-columns:repeat(2,1fr)}
+  .pg{grid-template-columns:1fr 1fr}
+  .pc.wide{grid-column:span 2;grid-template-columns:1fr}
+  .tl,.egrid,.ctg{grid-template-columns:1fr;gap:2rem}
+  .ee{grid-template-columns:1fr;gap:.4rem}
+  footer{padding:1.2rem 2rem;flex-direction:column;gap:.3rem;text-align:center}
+}
+@media(max-width:640px){
+  nav{padding:0 1.2rem}
+  .hero-l{padding:2rem 1.2rem 3rem}
+  section{padding:3rem 1.2rem}
+  #comp,#contact{padding:3rem 1.2rem}
+  .cg{grid-template-columns:1fr}
+  .pg{grid-template-columns:1fr}
+  .pc.wide{grid-column:span 1}
+  .hname{font-size:3rem}
+  footer{padding:1.2rem}
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">D<span>.</span>Patel</a>
-  <ul class="nav-links">
-    <li><a href="#skills">Expertise</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#techskills">Tech</a></li>
+  <a href="#hero" class="nb">
+    <span class="nb-name">Dhara Patel</span>
+    <span class="nb-role">Mobile Architect · iOS Technical Lead</span>
+  </a>
+  <ul class="nl">
+    <li><a href="#comp">Expertise</a></li>
+    <li><a href="#exp">Experience</a></li>
+    <li><a href="#proj">Projects</a></li>
+    <li><a href="#tech">Skills</a></li>
+    <li><a href="#edu">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <div class="nsep"></div>
+  <div class="nc">
+    <a href="mailto:xxx@gmail.com">✉ Email</a>
+    <a href="https://linkedin.com/in/dhara-patel" target="_blank">↗ LinkedIn</a>
+    <a href="tel:+9197XXXXXXXX">📞 Call</a>
+  </div>
+  <button id="theme-toggle" title="Toggle dark mode" aria-label="Toggle theme">🌙</button>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-orb hero-orb-1"></div>
-  <div class="hero-orb hero-orb-2"></div>
-  <div class="hero-content">
-    <div class="hero-tag">Available for new opportunities</div>
-    <h1 class="hero-name">
-      Dhara<br>
-      <span class="line2">Patel</span>
-    </h1>
-    <p class="hero-desc">
-      Mobile Architect &amp; Technical Lead with 8+ years building enterprise-grade iOS and cross-platform applications that scale.
-    </p>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">8<span>+</span></div>
-        <div class="stat-label">Years Experience</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">10<span>+</span></div>
-        <div class="stat-label">Enterprise Apps</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">40<span>%</span></div>
-        <div class="stat-label">Bug Reduction</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">5<span>+</span></div>
-        <div class="stat-label">Projects Led</div>
-      </div>
+  <div class="hero-l">
+    <div class="hbadge">Open to new opportunities</div>
+    <h1 class="hname">Dhara Patel</h1>
+    <p class="htitle">Mobile Architect &amp; iOS Technical Lead</p>
+    <p class="hsummary">8+ years designing and delivering enterprise-grade iOS and cross-platform mobile applications. Expert at defining architecture strategies, leading engineering teams, embedding AI, and shipping products that scale across complex multi-team programs.</p>
+    <div class="hmeta">
+      <span class="hm">📍 Gujarat, India</span>
+      <span class="hm">💼 8+ Years Experience</span>
+      <span class="hm">⌨️ Swift · SwiftUI · Flutter</span>
     </div>
-    <div class="hero-cta">
-      <a href="#contact" class="btn-primary">↗ Get In Touch</a>
-      <a href="#projects" class="btn-outline">View Projects</a>
+    <div class="hctx">
+      <a href="#contact" class="btn1">Get In Touch →</a>
+      <a href="#proj" class="btn2">View Projects</a>
     </div>
   </div>
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    Scroll to explore
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-label">Core Competencies</div>
-  <h2 class="section-title">What I Bring<br>to the Table</h2>
-  <div class="skills-grid reveal">
-    <div class="skill-card">
-      <div class="skill-icon">🏗️</div>
-      <div class="skill-name">Mobile Architecture</div>
-      <div class="skill-desc">Clean Architecture, MVVM, VIPER, SOLID — designing systems that scale and are maintainable long-term.</div>
+  <div class="hero-r">
+    <div class="hr-stats">
+      <div class="hr-label">Career at a Glance</div>
+      <div class="sg">
+        <div><div class="sn">8<sup>+</sup></div><div class="sl">Years in Mobile</div></div>
+        <div><div class="sn">10<sup>+</sup></div><div class="sl">Enterprise Apps</div></div>
+        <div><div class="sn">40<sup>%</sup></div><div class="sl">Bug Reduction</div></div>
+        <div><div class="sn">5<sup>+</sup></div><div class="sl">Concurrent Projects</div></div>
+      </div>
     </div>
-    <div class="skill-card">
-      <div class="skill-icon">🍎</div>
-      <div class="skill-name">iOS Platform Engineering</div>
-      <div class="skill-desc">Expert in Swift, SwiftUI, UIKit, Combine, and the full Apple platform ecosystem.</div>
+    <div class="hr-exp">
+      <div class="hr-label">Core Expertise</div>
+      <div class="etags">
+        <span class="et hi">Clean Architecture</span>
+        <span class="et hi">SwiftUI</span>
+        <span class="et hi">OpenAI APIs</span>
+        <span class="et">Flutter / Dart</span>
+        <span class="et">MVVM · VIPER</span>
+        <span class="et">AES-256</span>
+        <span class="et">CI/CD</span>
+        <span class="et">Agile Lead</span>
+        <span class="et">Swift Concurrency</span>
+      </div>
     </div>
-    <div class="skill-card">
-      <div class="skill-icon">🔒</div>
-      <div class="skill-name">Enterprise Security</div>
-      <div class="skill-desc">AES-256 encryption, SSL pinning, OAuth 2.0, biometrics, and jailbreak detection for mission-critical apps.</div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">🤖</div>
-      <div class="skill-name">AI/ML Integration</div>
-      <div class="skill-desc">Leading R&amp;D embedding OpenAI APIs (GPT, summarization) into production mobile products.</div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">⚡</div>
-      <div class="skill-name">Performance Engineering</div>
-      <div class="skill-desc">Swift Concurrency, Instruments profiling — reducing API overhead, optimizing for low-bandwidth environments.</div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">🌐</div>
-      <div class="skill-name">Cross-Platform (Flutter)</div>
-      <div class="skill-desc">Production Flutter/Dart applications shipped to both App Store and Play Store.</div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">👥</div>
-      <div class="skill-name">Team Leadership</div>
-      <div class="skill-desc">Managing engineers, code reviews, mentorship, coding standards, and Agile/Scrum delivery at scale.</div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">🚀</div>
-      <div class="skill-name">CI/CD & DevOps</div>
-      <div class="skill-desc">Fastlane, GitHub Actions, Docker — automated pipelines to ship faster with confidence.</div>
+    <div class="hr-loc">
+      <div class="hr-label">Location &amp; Availability</div>
+      <div class="loc-line"><div class="loc-dot"></div>Gujarat, India</div>
+      <div class="loc-line" style="color:var(--teal)"><div class="loc-dot"></div>Open to Remote &amp; Hybrid</div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<!-- COMPETENCIES -->
+<section id="comp">
+  <div class="ey w">Core Competencies</div>
+  <h2 class="sh w">What I Bring to the Table</h2>
+  <div class="cg rv">
+    <div class="ci"><div class="cico">🏗️</div><div class="cn">Mobile Architecture Design</div><div class="cd">Clean Architecture, MVVM, VIPER, SOLID — modular systems built for longevity and scale.</div></div>
+    <div class="ci"><div class="cico">🍎</div><div class="cn">iOS Platform Engineering</div><div class="cd">Expert in Swift, SwiftUI, UIKit, Combine and the full Apple ecosystem.</div></div>
+    <div class="ci"><div class="cico">🔐</div><div class="cn">Enterprise Security &amp; Compliance</div><div class="cd">AES-256, SSL Pinning, OAuth 2.0, Biometrics &amp; Jailbreak Detection for mission-critical apps.</div></div>
+    <div class="ci"><div class="cico">🤖</div><div class="cn">AI / ML Integration</div><div class="cd">Led R&amp;D embedding OpenAI GPT &amp; summarization APIs into production mobile products.</div></div>
+    <div class="ci"><div class="cico">⚡</div><div class="cn">Performance Engineering</div><div class="cd">Swift Concurrency, Instruments profiling — API response overhead reduced by 25%.</div></div>
+    <div class="ci"><div class="cico">🌐</div><div class="cn">Cross-Platform (Flutter)</div><div class="cd">Production Flutter/Dart applications shipped to App Store &amp; Play Store.</div></div>
+    <div class="ci"><div class="cico">👥</div><div class="cn">Technical Leadership &amp; Mentorship</div><div class="cd">Team management, code reviews, engineering standards, and Agile delivery at scale.</div></div>
+    <div class="ci"><div class="cico">🚀</div><div class="cn">CI/CD &amp; DevOps</div><div class="cd">Fastlane, GitHub Actions, Docker — automated pipelines that ship with confidence.</div></div>
+  </div>
+</section>
 
 <!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-label">Career Journey</div>
-  <h2 class="section-title">Professional<br>Experience</h2>
-  <div class="exp-timeline">
+<section id="exp">
+  <div class="ey">Experience</div>
+  <h2 class="sh">Professional History</h2>
+  <div class="ew">
 
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-period">May 2022 — Mar 2025</div>
-        <div class="exp-company">Seaflux Technologies</div>
-        <div class="exp-location">Ahmedabad, India</div>
+    <div class="ee rv">
+      <div>
+        <div class="ep">May 2022 — Mar 2025</div>
+        <div class="ec">Seaflux Technologies Pvt. Ltd.</div>
+        <div class="eloc">Ahmedabad, India</div>
       </div>
-      <div class="exp-body">
-        <div class="exp-role">Technical Lead &amp; Senior iOS Engineer</div>
-        <ul class="exp-points">
-          <li>Defined and owned mobile architecture strategy for 5+ concurrent enterprise projects, reducing technical debt by <strong>30%</strong>.</li>
-          <li>Led R&amp;D embedding OpenAI APIs into a flagship product, delivering a first-to-market AI feature that improved user engagement by <strong>18%</strong>.</li>
-          <li>Redesigned networking stack with Swift Concurrency, cutting API response overhead by <strong>25%</strong>.</li>
-          <li>Managed a team of 5 engineers; introduced code-review frameworks and automated linting, reducing production bugs by <strong>40%</strong>.</li>
-          <li>Served as primary technical liaison for international clients — requirement workshops, ADRs, and technical roadmap presentations.</li>
+      <div>
+        <div class="er">Technical Lead &amp; Senior iOS Engineer</div>
+        <ul class="el">
+          <li>Defined and owned mobile architecture strategy for <strong>5+ concurrent enterprise projects</strong>, applying Clean Architecture and modular design — reducing technical debt by <strong>30%</strong>.</li>
+          <li>Led R&amp;D to embed <strong>OpenAI API</strong> capabilities into a flagship product; delivered a first-to-market AI feature improving user engagement by <strong>18%</strong>.</li>
+          <li>Redesigned core networking stack with <strong>Swift Concurrency (Async/Await, Actors)</strong>, reducing API response overhead by <strong>25%</strong> on low-bandwidth networks.</li>
+          <li>Managed a team of <strong>5 engineers</strong>; introduced code-review frameworks and automated linting — reducing production bugs by <strong>40%</strong>.</li>
+          <li>Primary technical liaison for international clients — requirement workshops, Architecture Decision Records (ADRs), and roadmap presentations to non-technical stakeholders.</li>
+          <li>Consistently delivered all project milestones on schedule within Agile/Scrum sprints with full test coverage.</li>
         </ul>
-        <div class="exp-highlight">
-          <span class="tag accent">Clean Architecture</span>
-          <span class="tag accent">SwiftUI</span>
-          <span class="tag accent">OpenAI APIs</span>
-          <span class="tag">Flutter</span>
-          <span class="tag">CI/CD</span>
-          <span class="tag">Agile</span>
+        <div class="br">
+          <span class="b bl">Clean Architecture</span><span class="b bl">SwiftUI</span><span class="b bl">OpenAI APIs</span>
+          <span class="b">Flutter</span><span class="b">CI/CD</span><span class="b">Agile/Scrum</span><span class="b ba">Technical Lead</span>
         </div>
       </div>
     </div>
 
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-period">Nov 2020 — May 2022</div>
-        <div class="exp-company">DRC Systems</div>
-        <div class="exp-location">Ahmedabad, India</div>
+    <div class="ee rv">
+      <div>
+        <div class="ep">Nov 2020 — May 2022</div>
+        <div class="ec">DRC Systems Pvt. Ltd.</div>
+        <div class="eloc">Ahmedabad, India</div>
       </div>
-      <div class="exp-body">
-        <div class="exp-role">Senior iOS Engineer</div>
-        <ul class="exp-points">
-          <li>Architected high-security iOS modules for banking-grade apps with AES-256 encrypted payment gateways and biometric auth.</li>
-          <li>Designed a reusable Design System adopted across <strong>6+ client applications</strong>, cutting new-feature dev time by 20%.</li>
-          <li>Contributed to technical pre-sales proposals, helping win new enterprise contracts.</li>
-          <li>Conducted bi-weekly architecture review sessions and 1:1 mentoring with 3 mid-level developers.</li>
+      <div>
+        <div class="er">Senior iOS Engineer</div>
+        <ul class="el">
+          <li>Architected high-security iOS modules for banking-grade apps with <strong>AES-256 encrypted payment gateways</strong>, SSL pinning, and biometric authentication.</li>
+          <li>Designed a <strong>reusable UI Design System</strong> adopted across 6+ client applications — cutting new-feature development time by <strong>20%</strong> and enforcing cross-app UI consistency.</li>
+          <li>Collaborated with business development on technical proposals, directly contributing to winning new enterprise contracts.</li>
+          <li>Conducted bi-weekly architecture reviews and 1:1 mentoring with <strong>3 mid-level developers</strong>, improving team velocity and code quality scores.</li>
         </ul>
-        <div class="exp-highlight">
-          <span class="tag accent">FinTech</span>
-          <span class="tag accent">Security</span>
-          <span class="tag">Design Systems</span>
-          <span class="tag">UIKit</span>
-          <span class="tag teal">Mentorship</span>
+        <div class="br">
+          <span class="b bl">FinTech Security</span><span class="b bl">AES-256</span>
+          <span class="b">Design Systems</span><span class="b">UIKit</span><span class="b bg">Mentorship</span>
         </div>
       </div>
     </div>
 
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-period">Aug 2016 — Aug 2020</div>
-        <div class="exp-company">Solution Analysts</div>
-        <div class="exp-location">Ahmedabad, India</div>
+    <div class="ee rv">
+      <div>
+        <div class="ep">Aug 2016 — Aug 2020</div>
+        <div class="ec">Solution Analysts Pvt. Ltd.</div>
+        <div class="eloc">Ahmedabad, India</div>
       </div>
-      <div class="exp-body">
-        <div class="exp-role">iOS Developer</div>
-        <ul class="exp-points">
-          <li>Managed full App Store lifecycle for <strong>10+ enterprise applications</strong> at 99.9% crash-free session rates.</li>
-          <li>Led Objective-C to Swift migration improving maintainability and reducing onboarding time.</li>
-          <li>Pioneered internal Flutter adoption for rapid prototyping, contributing to 3 new cross-platform contracts.</li>
-          <li>Established iOS coding standards adopted organisation-wide; contributed to hiring and technical screening.</li>
+      <div>
+        <div class="er">iOS Developer</div>
+        <ul class="el">
+          <li>Managed full <strong>App Store lifecycle for 10+ enterprise iOS applications</strong>, maintaining <strong>99.9% crash-free session rates</strong> across all production releases.</li>
+          <li>Led <strong>Objective-C to Swift migration</strong> for large-scale codebases, improving maintainability and reducing onboarding time for new engineers.</li>
+          <li>Pioneered internal <strong>Flutter adoption</strong> for rapid client prototyping, contributing to securing 3 new cross-platform contracts.</li>
+          <li>Established iOS coding standards and best practices adopted organisation-wide; contributed to hiring and technical screening processes.</li>
         </ul>
-        <div class="exp-highlight">
-          <span class="tag">Swift Migration</span>
-          <span class="tag accent">App Store</span>
-          <span class="tag teal">Flutter Pioneer</span>
-          <span class="tag">Standards</span>
+        <div class="br">
+          <span class="b">Swift Migration</span><span class="b bl">App Store</span>
+          <span class="b bg">Flutter Pioneer</span><span class="b">Coding Standards</span>
         </div>
       </div>
     </div>
 
   </div>
 </section>
-
-<div class="divider"></div>
 
 <!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">Selected Work</div>
-  <h2 class="section-title">Key Projects &amp;<br>Highlights</h2>
-  <div class="projects-grid">
+<section id="proj">
+  <div class="ey">Selected Work</div>
+  <h2 class="sh">Key Projects &amp; Architectural Highlights</h2>
+  <div class="pg">
 
-    <div class="project-card reveal">
-      <div class="project-num">01 / SECURE COMMS</div>
-      <div class="project-title">UKnowMe</div>
-      <div class="project-role">Technical Lead</div>
-      <p class="project-desc">Privacy-first encrypted messaging &amp; VoIP platform with high-concurrency architecture, custom AES-256 payload encryption, and a dynamic time-blocking privacy engine for zero-interruption UX.</p>
-      <div class="project-stack">
-        <span class="tag">Flutter</span><span class="tag">SQLite</span><span class="tag">WebRTC</span><span class="tag">AES-256</span><span class="tag">AWS Amplify</span><span class="tag">OAuth 2.0</span>
+    <div class="pc wide rv">
+      <div>
+        <div class="ph"><span class="pi">01 · Secure Communications</span><span class="prb">Technical Lead</span></div>
+        <div class="pn">UKnowMe</div>
+        <div class="pcat">Privacy-First Encrypted Messaging &amp; VoIP</div>
+        <p class="pd">Designed and implemented a high-concurrency encrypted messaging and VoIP architecture supporting 1:1 and group interactions. Built a custom AES-256 payload encryption layer with offline message persistence engine. Engineered a Time-Blocking Dynamic Privacy Engine with configurable contact group policies and silent APNs payload handling for zero-interruption UX.</p>
+        <div class="ps"><span class="st">Flutter</span><span class="st">SQLite</span><span class="st">Stream.io SDK</span><span class="st">WebRTC</span><span class="st">AES-256</span><span class="st">AWS Amplify</span><span class="st">OAuth 2.0</span><span class="st">APNs</span></div>
+      </div>
+      <div style="padding-top:2.5rem">
+        <p class="pd">Implemented enterprise-grade OAuth 2.0 via AWS Amplify with automated session expiry and secure token rotation. Delivered a configurable background badge synchronisation system maintaining notification accuracy during privacy-blocked hours — a first-to-market UX differentiator.</p>
+        <div class="phbox">
+          <div class="phbox-lbl">Key Highlights</div>
+          <div class="phbox-txt">High-concurrency encrypted architecture · Custom AES-256 engine · Dynamic Privacy Engine · OAuth 2.0 + token rotation</div>
+        </div>
       </div>
     </div>
 
-    <div class="project-card reveal">
-      <div class="project-num">02 / WEALTH MANAGEMENT</div>
-      <div class="project-title">LifeTidy</div>
-      <div class="project-role">Technical Lead</div>
-      <p class="project-desc">Wealth management platform with multilayer security hardening — SSL pinning, runtime jailbreak detection, and a custom SwiftUI data visualisation engine rendering interactive financial dashboards.</p>
-      <div class="project-stack">
-        <span class="tag">SwiftUI</span><span class="tag">Core Graphics</span><span class="tag">SSL Pinning</span><span class="tag">Security</span>
-      </div>
+    <div class="pc rv">
+      <div class="ph"><span class="pi">02 · Wealth Management</span><span class="prb">Technical Lead</span></div>
+      <div class="pn">LifeTidy</div>
+      <div class="pcat">Security &amp; Financial Platform</div>
+      <p class="pd">Multilayer security hardening with SSL Pinning (MITM prevention) and runtime Jailbreak Detection protecting sensitive wealth data. Custom SwiftUI + Core Graphics data visualisation engine rendering interactive financial dashboards — Mortgages, Loans, and Investments — with smooth animations.</p>
+      <div class="ps"><span class="st">SwiftUI</span><span class="st">Core Graphics</span><span class="st">SSL Pinning</span><span class="st">Jailbreak Detection</span></div>
     </div>
 
-    <div class="project-card reveal">
-      <div class="project-num">03 / DIGITAL ASSETS</div>
-      <div class="project-title">DigiGold</div>
-      <div class="project-role">Technical Lead</div>
-      <p class="project-desc">Digital asset trading and SIP platform with WebSocket-based live commodity price ticker, recurring investment engine, and end-to-end digital-to-physical asset redemption workflow.</p>
-      <div class="project-stack">
-        <span class="tag">Swift</span><span class="tag">WebSockets</span><span class="tag">Firebase</span><span class="tag">RESTful APIs</span>
-      </div>
+    <div class="pc rv">
+      <div class="ph"><span class="pi">03 · Digital Assets</span><span class="prb">Technical Lead</span></div>
+      <div class="pn">DigiGold</div>
+      <div class="pcat">Digital Asset Trading &amp; SIP Platform</div>
+      <p class="pd">WebSocket-based live Gold/Silver commodity price ticker and a recurring investment (SIP) engine for automated scheduled asset accumulation. End-to-end digital-to-physical asset redemption with encrypted address verification and a secure digital gifting module.</p>
+      <div class="ps"><span class="st">Swift</span><span class="st">WebSockets</span><span class="st">Firebase</span><span class="st">RESTful APIs</span></div>
     </div>
 
-    <div class="project-card reveal">
-      <div class="project-num">04 / FINTECH SUPER-APP</div>
-      <div class="project-title">Habari</div>
-      <div class="project-role">Senior iOS Developer</div>
-      <p class="project-desc">Modular financial ecosystem supporting card processing, digital wallets, and P2P transfers with idempotent API handling. Features real-time transaction alerts via Socket.io and offline-first encrypted SQLite ledger.</p>
-      <div class="project-stack">
-        <span class="tag">Swift</span><span class="tag">UIKit</span><span class="tag">SQLite</span><span class="tag">Socket.io</span><span class="tag">GTBank APIs</span>
-      </div>
+    <div class="pc rv">
+      <div class="ph"><span class="pi">04 · FinTech Super-App</span><span class="prb">Senior iOS Dev</span></div>
+      <div class="pn">Habari</div>
+      <div class="pcat">Modular Financial Ecosystem</div>
+      <p class="pd">Modular ecosystem supporting Card Processing, Digital Wallets &amp; P2P Transfers with idempotent API handling. Centralised Identity &amp; KYC module with offline-first encrypted SQLite ledger. Real-time push alerts and in-app social chat via Socket.io, optimised for low latency at scale.</p>
+      <div class="ps"><span class="st">Swift</span><span class="st">UIKit</span><span class="st">SQLite</span><span class="st">Socket.io</span><span class="st">GTBank APIs</span></div>
     </div>
 
-    <div class="project-card reveal">
-      <div class="project-num">05 / IOT LOGISTICS</div>
-      <div class="project-title">Wheels</div>
-      <div class="project-role">Senior iOS Developer</div>
-      <p class="project-desc">Real-time vehicle tracking system with persistent WebSocket connections supporting 500+ concurrent drivers. Configurable geofencing engine with automated APNs triggers reduced manual driver input by 90%.</p>
-      <div class="project-stack">
-        <span class="tag">Swift</span><span class="tag">Google Maps SDK</span><span class="tag">Geofencing</span><span class="tag">WebSockets</span><span class="tag">APNs</span>
-      </div>
+    <div class="pc rv">
+      <div class="ph"><span class="pi">05 · IoT Logistics</span><span class="prb">Senior iOS Dev</span></div>
+      <div class="pn">Wheels</div>
+      <div class="pcat">Real-Time Location Tracking</div>
+      <p class="pd">Sub-second real-time vehicle tracking via persistent WebSocket connections supporting <strong>500+ concurrent drivers</strong>. Configurable geofencing engine — automated APNs triggers reduced manual driver input by <strong>90%</strong> with adaptive battery-aware polling intervals.</p>
+      <div class="ps"><span class="st">Swift</span><span class="st">Google Maps SDK</span><span class="st">Geofencing</span><span class="st">WebSockets</span><span class="st">APNs</span><span class="st">Background Modes</span></div>
     </div>
 
   </div>
 </section>
-
-<div class="divider"></div>
 
 <!-- TECH SKILLS -->
-<section id="techskills">
-  <div class="section-label">Technical Arsenal</div>
-  <h2 class="section-title">Skills &amp; Tools</h2>
-  <div class="tech-cols reveal">
+<section id="tech">
+  <div class="ey">Technical Arsenal</div>
+  <h2 class="sh">Skills &amp; Technologies</h2>
+  <div class="tl rv">
     <div>
-      <div class="tech-group">
-        <div class="tech-group-label">Languages</div>
-        <div class="tech-pill-row">
-          <span class="tech-pill expert">Swift</span>
-          <span class="tech-pill">Objective-C</span>
-          <span class="tech-pill">Dart</span>
-          <span class="tech-pill">Python</span>
+      <div class="tg"><div class="tlb">Languages</div><div class="tp"><span class="pill p">Swift</span><span class="pill p">Dart (Flutter)</span><span class="pill">Objective-C</span><span class="pill">Python</span></div></div>
+      <div class="tg"><div class="tlb">UI &amp; Frameworks</div><div class="tp"><span class="pill p">SwiftUI</span><span class="pill p">UIKit</span><span class="pill">Combine</span><span class="pill">Core Animation</span><span class="pill">Core Graphics</span><span class="pill">Auto Layout</span><span class="pill">Flutter</span></div></div>
+      <div class="tg"><div class="tlb">Architecture &amp; Patterns</div><div class="tp"><span class="pill p">Clean Architecture</span><span class="pill">MVVM</span><span class="pill">VIPER</span><span class="pill">MVC</span><span class="pill">SOLID</span><span class="pill">Design Patterns</span></div></div>
+      <div class="tg"><div class="tlb">Concurrency</div><div class="tp"><span class="pill p">Async/Await</span><span class="pill p">Actors</span><span class="pill">GCD</span><span class="pill">Operation Queues</span><span class="pill">Instruments Profiling</span></div></div>
+    </div>
+    <div>
+      <div class="tg"><div class="tlb">Security</div><div class="tp"><span class="pill p">AES-256 Encryption</span><span class="pill p">SSL Pinning</span><span class="pill">OAuth 2.0</span><span class="pill">Face ID / Touch ID</span><span class="pill">Jailbreak Detection</span></div></div>
+      <div class="tg"><div class="tlb">AI &amp; Integrations</div><div class="tp"><span class="pill p">OpenAI APIs</span><span class="pill">RESTful APIs</span><span class="pill">WebSockets</span><span class="pill">Socket.io</span><span class="pill">Firebase</span><span class="pill">AWS Amplify</span></div></div>
+      <div class="tg"><div class="tlb">Data &amp; Storage</div><div class="tp"><span class="pill">Core Data</span><span class="pill">SQLite</span><span class="pill">PostgreSQL</span><span class="pill">MySQL</span></div></div>
+      <div class="tg"><div class="tlb">DevOps &amp; Tools</div><div class="tp"><span class="pill p">Fastlane</span><span class="pill p">GitHub Actions</span><span class="pill">Docker</span><span class="pill">Git</span><span class="pill">Xcode</span><span class="pill">JIRA</span><span class="pill">Figma</span><span class="pill">Postman</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="edu">
+  <div class="ey">Credentials</div>
+  <h2 class="sh">Education &amp; Certifications</h2>
+  <div class="egrid rv">
+    <div>
+      <div class="egh">Academic Education</div>
+      <div class="edl">
+        <div class="edi">
+          <div class="edico">🎓</div>
+          <div>
+            <div class="edd">M.Sc. in Information Technology</div>
+            <div class="eds">KSV University, Gujarat, India</div>
+            <div class="edy">2014 – 2016</div>
+          </div>
         </div>
-      </div>
-      <div class="tech-group">
-        <div class="tech-group-label">UI &amp; Frameworks</div>
-        <div class="tech-pill-row">
-          <span class="tech-pill expert">SwiftUI</span>
-          <span class="tech-pill expert">UIKit</span>
-          <span class="tech-pill">Combine</span>
-          <span class="tech-pill">Core Animation</span>
-          <span class="tech-pill">Flutter</span>
-        </div>
-      </div>
-      <div class="tech-group">
-        <div class="tech-group-label">Architecture</div>
-        <div class="tech-pill-row">
-          <span class="tech-pill expert">Clean Architecture</span>
-          <span class="tech-pill">MVVM</span>
-          <span class="tech-pill">VIPER</span>
-          <span class="tech-pill">SOLID</span>
-        </div>
-      </div>
-      <div class="tech-group">
-        <div class="tech-group-label">Security</div>
-        <div class="tech-pill-row">
-          <span class="tech-pill">SSL Pinning</span>
-          <span class="tech-pill">AES-256</span>
-          <span class="tech-pill">OAuth 2.0</span>
-          <span class="tech-pill">Biometrics</span>
-          <span class="tech-pill">Jailbreak Detection</span>
+        <div class="edi">
+          <div class="edico">📚</div>
+          <div>
+            <div class="edd">B.Sc. in Information Technology</div>
+            <div class="eds">Ganpat University, Gujarat, India</div>
+            <div class="edy">2011 – 2014</div>
+          </div>
         </div>
       </div>
     </div>
     <div>
-      <div class="tech-group">
-        <div class="tech-group-label">AI &amp; APIs</div>
-        <div class="tech-pill-row">
-          <span class="tech-pill expert">OpenAI APIs</span>
-          <span class="tech-pill">RESTful APIs</span>
-          <span class="tech-pill">WebSockets</span>
-          <span class="tech-pill">Firebase</span>
-          <span class="tech-pill">Socket.io</span>
+      <div class="egh">Professional Certifications</div>
+      <div class="cl">
+        <div class="cit">
+          <div class="cdot"></div>
+          <div class="cname">Flutter &amp; Dart — The Complete Bootcamp</div>
+          <div class="csrc">Udemy</div>
         </div>
-      </div>
-      <div class="tech-group">
-        <div class="tech-group-label">Data &amp; Storage</div>
-        <div class="tech-pill-row">
-          <span class="tech-pill">Core Data</span>
-          <span class="tech-pill">SQLite</span>
-          <span class="tech-pill">PostgreSQL</span>
-          <span class="tech-pill">AWS Amplify</span>
+        <div class="cit">
+          <div class="cdot"></div>
+          <div class="cname">Build REST APIs with Django REST Framework &amp; Python</div>
+          <div class="csrc">Udemy</div>
         </div>
-      </div>
-      <div class="tech-group">
-        <div class="tech-group-label">DevOps &amp; Tools</div>
-        <div class="tech-pill-row">
-          <span class="tech-pill">Fastlane</span>
-          <span class="tech-pill">GitHub Actions</span>
-          <span class="tech-pill">Docker</span>
-          <span class="tech-pill">Xcode</span>
-          <span class="tech-pill">JIRA</span>
-          <span class="tech-pill">Figma</span>
-        </div>
-      </div>
-      <div class="tech-group">
-        <div class="tech-group-label">Concurrency</div>
-        <div class="tech-pill-row">
-          <span class="tech-pill expert">Async/Await</span>
-          <span class="tech-pill">Actors</span>
-          <span class="tech-pill">GCD</span>
-          <span class="tech-pill">Instruments</span>
+        <div class="cit">
+          <div class="cdot"></div>
+          <div class="cname">Agile Project Management</div>
+          <div class="csrc">Udemy</div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<div class="divider"></div>
-
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-  <div class="section-label">Credentials</div>
-  <h2 class="section-title">Certifications</h2>
-  <div class="cert-list reveal">
-    <div class="cert-item">
-      <div class="cert-left">
-        <div class="cert-name">Flutter &amp; Dart — The Complete Bootcamp</div>
-        <div class="cert-provider">Udemy · Cross-Platform Mobile Development</div>
-      </div>
-      <div class="cert-badge">🎓</div>
-    </div>
-    <div class="cert-item">
-      <div class="cert-left">
-        <div class="cert-name">Build REST APIs with Django REST Framework &amp; Python</div>
-        <div class="cert-provider">Udemy · Backend &amp; API Development</div>
-      </div>
-      <div class="cert-badge">🐍</div>
-    </div>
-    <div class="cert-item">
-      <div class="cert-left">
-        <div class="cert-name">Agile Project Management</div>
-        <div class="cert-provider">Udemy · Project Delivery &amp; Leadership</div>
-      </div>
-      <div class="cert-badge">⚙️</div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-inner reveal">
-    <div class="section-label">Let's Connect</div>
-    <h2 class="contact-heading">Got a project?<br>Let's <em>build</em> it.</h2>
-    <p class="contact-sub">Open to senior/lead iOS and mobile architecture roles. Let's discuss how I can help your team deliver.</p>
-    <div class="contact-links">
-      <a href="mailto:xxx@gmail.com" class="contact-link">✉ Email Me</a>
-      <a href="https://www.linkedin.com/in/" target="_blank" class="contact-link">↗ LinkedIn</a>
-      <a href="tel:+9197XXXXXXXX" class="contact-link">📞 Call</a>
+  <div class="ctg">
+    <div>
+      <div class="ey w">Let's Connect</div>
+      <h2 class="cth">Let's build something <em>great</em> together.</h2>
+      <p class="cts">Open to senior iOS, mobile architecture, and technical lead roles. Experienced with international clients and distributed teams. Let's discuss your next project.</p>
+      <div class="clinks">
+        <a href="mailto:xxx@gmail.com" class="clink">
+          <div class="clico">✉</div>
+          <div class="cltxt"><div class="cllb">Email</div><div class="clv">xxx@gmail.com</div></div>
+          <span class="clarr">→</span>
+        </a>
+        <a href="https://linkedin.com/in/dhara-patel" target="_blank" class="clink">
+          <div class="clico" style="font-family:'Fira Code',monospace;font-size:.72rem;font-weight:500;color:#8AABFF">in</div>
+          <div class="cltxt"><div class="cllb">LinkedIn</div><div class="clv">linkedin.com/in/dhara-patel</div></div>
+          <span class="clarr">→</span>
+        </a>
+        <a href="tel:+9197XXXXXXXX" class="clink">
+          <div class="clico">📞</div>
+          <div class="cltxt"><div class="cllb">Phone</div><div class="clv">+91 97XX XXX XXX</div></div>
+          <span class="clarr">→</span>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="avbox">
+        <div class="avlbl">Current Status</div>
+        <div class="avst">Available for new roles</div>
+        <div class="avn">Based in Gujarat, India. Open to remote, hybrid, or relocation for the right opportunity and team.</div>
+      </div>
+      <div class="avbox">
+        <div class="avlbl">Roles of Interest</div>
+        <div class="itags">
+          <span class="itag">Mobile Architect</span>
+          <span class="itag">iOS Technical Lead</span>
+          <span class="itag">Principal Engineer</span>
+          <span class="itag">Staff Engineer</span>
+          <span class="itag">Consultant</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-copy">© 2025 Dhara Patel · Gujarat, India</span>
-  <span class="footer-stack">Mobile Architect · iOS · Flutter · Swift</span>
+  <span class="fl">© 2025 Dhara Patel · All rights reserved</span>
+  <span class="fr">Mobile Architect · iOS · Flutter · Swift · Gujarat, India</span>
 </footer>
 
 <script>
-  // Intersection Observer for reveal animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
+// ── THEME TOGGLE ────────────────────────────────
+const html = document.documentElement;
+const btn  = document.getElementById('theme-toggle');
+const saved = localStorage.getItem('dp-theme') || 'light';
+html.setAttribute('data-theme', saved);
+btn.textContent = saved === 'dark' ? '☀️' : '🌙';
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+btn.addEventListener('click', () => {
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  btn.textContent = next === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('dp-theme', next);
+});
 
-  // Stagger children inside reveal containers
-  document.querySelectorAll('.skills-grid, .projects-grid, .exp-timeline, .cert-list, .tech-cols').forEach(container => {
-    const children = container.querySelectorAll('.skill-card, .project-card, .exp-item, .cert-item');
-    children.forEach((child, i) => {
-      child.style.transitionDelay = `${i * 0.07}s`;
-      child.classList.add('reveal');
-    });
-    observer.observe(container);
-    children.forEach(c => observer.observe(c));
+// ── SCROLL REVEAL ───────────────────────────────
+const io = new IntersectionObserver(e => {
+  e.forEach(x => { if(x.isIntersecting){ x.target.classList.add('on'); io.unobserve(x.target); } });
+}, { threshold: .07 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+document.querySelectorAll('.cg,.pg,.tl,.egrid').forEach(c => {
+  c.querySelectorAll('.ci,.pc,.tg,.edi,.cit').forEach((ch,i) => {
+    ch.classList.add('rv');
+    ch.style.transitionDelay = i*.06 + 's';
+    io.observe(ch);
   });
+});
+document.querySelectorAll('.ee').forEach((el,i) => { el.style.transitionDelay = i*.08+'s'; });
 
-  // Smooth active nav highlight
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 120) current = s.id;
-    });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--text)' : '';
-    });
+// ── ACTIVE NAV ──────────────────────────────────
+const secs = document.querySelectorAll('section[id]');
+const lks  = document.querySelectorAll('.nl a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if(window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  lks.forEach(a => {
+    const on = a.getAttribute('href') === '#' + cur;
+    a.style.color      = on ? 'var(--blue)' : '';
+    a.style.background = on ? 'var(--blue-lt)' : '';
   });
+}, { passive: true });
 </script>
 </body>
 </html>
